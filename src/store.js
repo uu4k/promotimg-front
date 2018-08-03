@@ -10,8 +10,8 @@ const store = new Vuex.Store({
     baseimage: require("@/assets/logo.png"),
     text: "sampleメッセージ",
     textposition: "right",
-    textcolor: "#000000",
-    bgcolor: "#ffffff",
+    textcolor: "#ffffff",
+    bgcolor: "#c93a40",
   },
   getters: {
     baseimage(state) {

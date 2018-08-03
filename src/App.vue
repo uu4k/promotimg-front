@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img src="@/assets/logo.png">
-    <Promotimg/>
+    <Promotimg />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import Promotimg from '@/components/Promotimg'
 export default {
   name: 'App',
   components: {
-    Promotimg
+    Promotimg,
   }
 }
 </script>

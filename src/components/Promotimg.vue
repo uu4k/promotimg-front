@@ -1,17 +1,25 @@
 <template>
   <div>
     <input type="file" v-on:change="handleChangeBaseimage">
-    <div>
+    <br>
+    <div style="display:inline-block;">
+      <HorizontalText />
+      <!-- TODO 小さい画像の場合に小さい画像の横幅に合 -->
       <img v-bind:src="baseimage">
-      </div>
+      <HorizontalText />
+    </div>
   </div>
 </template>
 
 <script>
 import store from "@/store";
+import HorizontalText from "@/components/HorizontalText";
 
 export default {
   name: "Promotimg",
+  components: {
+    HorizontalText
+  },
   computed: {
     baseimage: {
       get() {
@@ -63,6 +71,6 @@ export default {
         this.baseimage = "";
       }
     }
-  },
+  }
 };
 </script>
