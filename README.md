@@ -1,6 +1,6 @@
-# marketimg-front
+# promotimg-front
 
-> frontend for marketimg
+> frontend for promotimg
 
 ## Build Setup
 

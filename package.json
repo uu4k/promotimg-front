@@ -1,7 +1,7 @@
 {
-  "name": "marketimg-front",
+  "name": "promotimg-front",
   "version": "1.0.0",
-  "description": "frontend for marketimg",
+  "description": "frontend for promotimg",
   "author": "uu4k <t.shimizu1115@gmail.com>",
   "private": true,
   "scripts": {
@@ -10,7 +10,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2"
+    "babel-polyfill": "^6.26.0",
+    "vue": "^2.5.2",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
