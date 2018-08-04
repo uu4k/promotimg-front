@@ -3,8 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store.js'
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
 
 Vue.config.productionTip = false
+
+import VueOnsen from 'vue-onsenui';
+Vue.use(VueOnsen)
 
 /* eslint-disable no-new */
 new Vue({

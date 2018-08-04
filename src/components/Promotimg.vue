@@ -78,12 +78,12 @@ export default {
 <style>
 @font-face {
   font-family: mplus-1c-bold;
-  src: url('~@/assets/mplus-1c-bold.ttf');
+  src: url("~@/assets/mplus-1c-bold.ttf");
 }
 
-img#baseimage{
-	margin: 0;
-	padding: 0;
-	vertical-align: bottom;
+img#baseimage {
+  margin: 0;
+  padding: 0;
+  vertical-align: bottom;
 }
 </style>

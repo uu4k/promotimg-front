@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "onsenui": "^2.10.4",
     "vue": "^2.5.2",
+    "vue-onsenui": "^2.6.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -27,6 +29,7 @@
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
+    "eslint": "^5.2.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
@@ -43,6 +46,7 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vue-eslint-parser": "^3.2.2",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",

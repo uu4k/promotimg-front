@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <img src="@/assets/logo.png">
-    <Promotimg />
+    <v-ons-page>
+      <v-ons-toolbar>
+        <div class="center">PromotImg</div>
+      </v-ons-toolbar>
+      <Promotimg />
+    </v-ons-page>
   </div>
 </template>
 
