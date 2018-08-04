@@ -4,8 +4,8 @@
     <br>
     <div style="display:inline-block;">
       <HorizontalText />
-      <!-- TODO 小さい画像の場合に小さい画像の横幅に合 -->
-      <img v-bind:src="baseimage">
+      <!-- TODO 小さい画像の場合に小さい画像の横幅に合わせる -->
+      <img v-bind:src="baseimage" id="baseimage">
       <HorizontalText />
     </div>
   </div>
@@ -74,3 +74,16 @@ export default {
   }
 };
 </script>
+
+<style>
+@font-face {
+  font-family: mplus-1c-bold;
+  src: url('~@/assets/mplus-1c-bold.ttf');
+}
+
+img#baseimage{
+	margin: 0;
+	padding: 0;
+	vertical-align: bottom;
+}
+</style>

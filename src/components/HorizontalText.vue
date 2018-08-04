@@ -1,6 +1,6 @@
 <template>
   <div v-bind:style="{ color: textcolor, backgroundColor: bgcolor }" >
-      {{ text }}
+      <font face="mplus-1c-bold">{{ text }}</font>
   </div>
 </template>
 
