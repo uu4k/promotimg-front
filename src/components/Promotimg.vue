@@ -13,16 +13,19 @@
       cancelable
       :visible.sync="imageDialogVisible"
     >
-      <v-ons-page>
-        <v-ons-toolbar>
-          <div class="center">イメージを選択してください.</div>
-        </v-ons-toolbar>
+      <v-ons-toolbar inline>
+        <div class="center">イメージを選択してください.</div>
+      </v-ons-toolbar>
+      <div style="padding: 0 22px 22px 22px">
         <label for="file_baseimage">
           <!-- TODO デザイン調整 -->
           ＋写真を選択
           <input type="file" v-on:change="handleChangeBaseimage" id="file_baseimage" style="display:none;" />
         </label>
-      </v-ons-page>
+        <section style="padding: 8px; padding-top: 30px;">
+          <ons-button modifier="large">閉じる</ons-button>
+        </section>
+      </div>
     </v-ons-dialog>
     <v-ons-dialog
       cancelable
@@ -31,21 +34,25 @@
       <v-ons-toolbar inline>
         <div class="center">テキストを指定してください.</div>
       </v-ons-toolbar>
-      <div style="padding: 0 22px 22px 22px">
+      <div style="padding: 0 22px 22px 22px; text-align: center;">
+        <div v-bind:style="{ color: textcolor, backgroundColor: bgcolor }" style="white-space: pre-wrap; display:inline-block;">
+            <font face="mplus-1c-bold">{{ text }}</font>
+        </div>
         <p style="opacity: 0.6; font-size: 80%;">テキスト</p>
         <div>
-          <textarea v-model="text" class="textarea" rows="3" placeholder="Textarea"></textarea>
+          <textarea v-model="text" class="textarea" rows="3" cols="44"></textarea>
         </div>
-
         <p style="opacity: 0.6; font-size: 80%;">文字色</p>
         <div>
           <slider-picker v-model="textcolor" />
         </div>
-
         <p style="opacity: 0.6; font-size: 80%;">背景色</p>
         <div>
           <slider-picker v-model="bgcolor" />
         </div>
+        <section style="padding: 8px; padding-top: 30px;">
+          <ons-button modifier="large">閉じる</ons-button>
+        </section>
       </div>
     </v-ons-dialog>
   </div>
@@ -82,6 +89,7 @@ export default {
         return this.$store.getters.text;
       },
       set(value) {
+        console.log(value);
         this.$store.dispatch("updateText", value);
       }
     },

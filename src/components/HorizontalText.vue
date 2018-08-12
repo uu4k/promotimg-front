@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:style="{ color: textcolor, backgroundColor: bgcolor }" >
+  <div v-bind:style="{ color: textcolor, backgroundColor: bgcolor }" style="white-space: pre-wrap;">
       <font face="mplus-1c-bold">{{ text }}</font>
   </div>
 </template>

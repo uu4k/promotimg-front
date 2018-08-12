@@ -35,7 +35,7 @@ const store = new Vuex.Store({
       state.baseimage = payload.value
     },
     setText(state, payload) {
-      state.text = payload.text
+      state.text = payload.value
     },
     setTextposition(state, payload) {
       state.textposition = payload.value
