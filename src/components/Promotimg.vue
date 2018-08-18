@@ -1,12 +1,20 @@
 <template>
   <div>
-    <!-- <input type="file" v-on:change="handleChangeBaseimage"> -->
-    <br>
-    <div style="display:inline-block;">
+    <!-- <div style="display:inline-block;">
       <HorizontalText v-on:click.native="textDialogVisible=true" />
-      <!-- TODO 小さい画像の場合に小さい画像の横幅に合わせる -->
+      <VerticalText v-on:click.native="textDialogVisible=true" />
       <img v-bind:src="baseimage" id="baseimage" v-on:click="imageDialogVisible=true">
+      <VerticalText v-on:click.native="textDialogVisible=true" />
       <HorizontalText v-on:click.native="textDialogVisible=true" />
+    </div> -->
+
+    <div style="display: inline-block; letter-spacing: -.4em;">
+      <HorizontalText v-on:click.native="textDialogVisible=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;"/>
+      <!-- TODO 小さい画像の場合に小さい画像の横幅に合わせる -->
+      <VerticalText v-on:click.native="textDialogVisible=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
+      <img v-bind:src="baseimage" id="baseimage" v-on:click="imageDialogVisible=true" v-on:load="handleLoadBaseimage">
+      <VerticalText v-on:click.native="textDialogVisible=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
+      <HorizontalText v-on:click.native="textDialogVisible=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;"/>
     </div>
 
     <v-ons-dialog
@@ -59,20 +67,24 @@
 </template>
 
 <script>
-import store from "@/store";
-import HorizontalText from "@/components/HorizontalText";
+import store from "@/store"
+import HorizontalText from "@/components/HorizontalText"
+import VerticalText from "@/components/VerticalText"
 import { Slider } from 'vue-color'
 
 export default {
   name: "Promotimg",
   components: {
     HorizontalText,
+    VerticalText,
     'slider-picker': Slider
   },
   data() {
     return {
       imageDialogVisible: false,
       textDialogVisible: false,
+      imageHeight: 255,
+      imageWidth: 255,
     };
   },
   computed: {
@@ -89,7 +101,6 @@ export default {
         return this.$store.getters.text;
       },
       set(value) {
-        console.log(value);
         this.$store.dispatch("updateText", value);
       }
     },
@@ -127,8 +138,11 @@ export default {
         // TODO アラート表示
         // this.baseimage = "";
       }
-      // TODO ダイアログ閉じる
       this.imageDialogVisible = false
+    },
+    handleLoadBaseimage(event) {
+      this.imageWidth = event.currentTarget.width
+      this.imageHeight = event.currentTarget.height
     }
   }
 };
