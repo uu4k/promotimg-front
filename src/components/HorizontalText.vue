@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:style="{ color: textcolor, backgroundColor: bgcolor }" style="white-space: pre-wrap;">
+  <div v-bind:style="{ color: textcolor, backgroundColor: bgcolor, fontSize: textsize + 'px' }" style="white-space: pre-wrap;">
       <font face="mplus-1c-bold">{{ text }}</font>
   </div>
 </template>
@@ -33,7 +33,15 @@ export default {
       set(value) {
         this.$store.dispatch("updateTextcolor", value);
       }
-    }
+    },
+    textsize: {
+      get() {
+        return this.$store.getters.textsize;
+      },
+      set(value) {
+        this.$store.dispatch("updateTextsize", value);
+      }
+    },
   },
 };
 </script>

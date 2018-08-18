@@ -43,12 +43,16 @@
         <div class="center">テキストを指定してください.</div>
       </v-ons-toolbar>
       <div style="padding: 0 22px 22px 22px; text-align: center;">
-        <div v-bind:style="{ color: textcolor, backgroundColor: bgcolor }" style="white-space: pre-wrap; display:inline-block;">
+        <div v-bind:style="{ color: textcolor, backgroundColor: bgcolor, fontSize: textsize + 'px' }" style="white-space: pre-wrap; display:inline-block;">
             <font face="mplus-1c-bold">{{ text }}</font>
         </div>
         <p style="opacity: 0.6; font-size: 80%;">テキスト</p>
         <div>
           <textarea v-model="text" class="textarea" rows="3" cols="44"></textarea>
+        </div>
+        <p style="opacity: 0.6; font-size: 80%;">テキストサイズ</p>
+        <div>
+          <input type="range" min="1" max="100" v-model="textsize" style="width: 100%">
         </div>
         <p style="opacity: 0.6; font-size: 80%;">文字色</p>
         <div>
@@ -127,7 +131,15 @@ export default {
       set(value) {
         this.$store.dispatch("updateBgcolor", value.hex);
       }
-    }
+    },
+    textsize: {
+      get() {
+        return this.$store.getters.textsize;
+      },
+      set(value) {
+        this.$store.dispatch("updateTextsize", value);
+      }
+    },
   },
   methods: {
     handleChangeBaseimage(event) {

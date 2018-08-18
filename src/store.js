@@ -12,6 +12,7 @@ const store = new Vuex.Store({
     textposition: "right",
     textcolor: "#ffffff",
     bgcolor: "#c93a40",
+    textsize: 22,
   },
   getters: {
     baseimage(state) {
@@ -29,6 +30,9 @@ const store = new Vuex.Store({
     bgcolor(state) {
       return state.bgcolor
     },
+    textsize(state) {
+      return state.textsize
+    },
   },
   mutations: {
     setBaseimage(state, payload) {
@@ -45,6 +49,9 @@ const store = new Vuex.Store({
     },
     setBgcolor(state, payload) {
       state.bgcolor = payload.value
+    },
+    setTextsize(state, payload) {
+      state.textsize = payload.value
     },
   },
   actions: {
@@ -80,6 +87,13 @@ const store = new Vuex.Store({
       commit
     }, value) {
       commit('setBgcolor', {
+        value
+      })
+    },
+    updateTextsize({
+      commit
+    }, value) {
+      commit('setTextsize', {
         value
       })
     },
