@@ -9,7 +9,7 @@ const store = new Vuex.Store({
   state: {
     baseimage: require("@/assets/logo.png"),
     text: "sampleメッセージ",
-    textposition: "right",
+    textposition: "bottom",
     textcolor: "#ffffff",
     bgcolor: "#c93a40",
     textsize: 22,

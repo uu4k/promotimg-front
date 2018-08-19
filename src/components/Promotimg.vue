@@ -1,20 +1,11 @@
 <template>
   <div>
-    <!-- <div style="display:inline-block;">
-      <HorizontalText v-on:click.native="textDialogVisible=true" />
-      <VerticalText v-on:click.native="textDialogVisible=true" />
-      <img v-bind:src="baseimage" id="baseimage" v-on:click="imageDialogVisible=true">
-      <VerticalText v-on:click.native="textDialogVisible=true" />
-      <HorizontalText v-on:click.native="textDialogVisible=true" />
-    </div> -->
-
     <div style="display: inline-block; letter-spacing: -.4em;">
-      <HorizontalText v-on:click.native="textDialogVisible=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;"/>
-      <!-- TODO 小さい画像の場合に小さい画像の横幅に合わせる -->
-      <VerticalText v-on:click.native="textDialogVisible=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
+      <HorizontalText v-show="textposition=='top'" v-on:click.native="textDialogVisible=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;" />
+      <VerticalText v-show="textposition=='left'" v-on:click.native="textDialogVisible=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
       <img v-bind:src="baseimage" id="baseimage" v-on:click="imageDialogVisible=true" v-on:load="handleLoadBaseimage">
-      <VerticalText v-on:click.native="textDialogVisible=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
-      <HorizontalText v-on:click.native="textDialogVisible=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;"/>
+      <VerticalText v-show="textposition=='right'" v-on:click.native="textDialogVisible=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
+      <HorizontalText v-show="textposition=='bottom'" v-on:click.native="textDialogVisible=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;"/>
     </div>
 
     <v-ons-dialog
@@ -31,7 +22,7 @@
           <input type="file" v-on:change="handleChangeBaseimage" id="file_baseimage" style="display:none;" />
         </label>
         <section style="padding: 8px; padding-top: 30px;">
-          <ons-button modifier="large">閉じる</ons-button>
+          <ons-button modifier="large" v-on:click="imageDialogVisible=false">閉じる</ons-button>
         </section>
       </div>
     </v-ons-dialog>
@@ -54,6 +45,14 @@
         <div>
           <input type="range" min="1" max="100" v-model="textsize" style="width: 100%">
         </div>
+        <p style="opacity: 0.6; font-size: 80%;">テキスト位置</p>
+        <div>
+          <!-- TODO 上→左と選択すると表示おかしくなる -->
+          <input type="radio" value="top" id="textposition_top" v-model="textposition"><label for="textposition_top">上</label>
+          <input type="radio" value="bottom" id="textposition_bottom" v-model="textposition"><label for="textposition_bottom">下</label>
+          <input type="radio" value="right" id="textposition_right" v-model="textposition"><label for="textposition_right">右</label>
+          <input type="radio" value="left" id="textposition_left" v-model="textposition"><label for="textposition_left">左</label>
+        </div>
         <p style="opacity: 0.6; font-size: 80%;">文字色</p>
         <div>
           <slider-picker v-model="textcolor" />
@@ -63,7 +62,7 @@
           <slider-picker v-model="bgcolor" />
         </div>
         <section style="padding: 8px; padding-top: 30px;">
-          <ons-button modifier="large">閉じる</ons-button>
+          <ons-button modifier="large" v-on:click="textDialogVisible=false">閉じる</ons-button>
         </section>
       </div>
     </v-ons-dialog>
