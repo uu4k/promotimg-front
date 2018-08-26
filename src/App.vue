@@ -1,11 +1,10 @@
 <template>
   <div id="app">
-    <v-ons-page>
-      <v-ons-toolbar>
-        <div class="center">PromotImg</div>
-      </v-ons-toolbar>
-      <Promotimg />
-    </v-ons-page>
+    <b-navbar toggleable="md" type="dark" variant="info">
+      <b-navbar-brand href="#">Promotimg</b-navbar-brand>
+    </b-navbar>
+
+    <Promotimg />
   </div>
 </template>
 
@@ -27,6 +26,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 </style>

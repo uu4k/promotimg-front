@@ -3,13 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store.js'
-import 'onsenui/css/onsenui.css';
-import 'onsenui/css/onsen-css-components.css';
 
 Vue.config.productionTip = false
 
-import VueOnsen from 'vue-onsenui';
-Vue.use(VueOnsen)
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 /* eslint-disable no-new */
 new Vue({
