@@ -38,23 +38,23 @@
             <font face="mplus-1c-bold">{{ text }}</font>
         </div>
         <b-form-group
-                      label="テキスト"
-                      label-for="textInput"
+          label="テキスト"
+          label-for="textInput"
         >
           <b-form-textarea id="textInput"
-                        v-model="text"
-                        placeholder="Enter text">
+            v-model="text"
+            placeholder="Enter text">
           </b-form-textarea>
         </b-form-group>
         <b-form-group
-                      label="テキストサイズ"
-                      label-for="textsizeInput"
+          label="テキストサイズ"
+          label-for="textsizeInput"
         >
           <b-form-input type="range" v-model="textsize" id="textsizeInput"></b-form-input>
         </b-form-group>
         <b-form-group
-                      label="テキスト位置"
-                      label-for="textpositionInput"
+          label="テキスト位置"
+          label-for="textpositionInput"
         >
           <b-form-radio-group id="textpositionInput" v-model="textposition" name="textposition">
             <b-form-radio value="top">上</b-form-radio>
@@ -64,16 +64,16 @@
           </b-form-radio-group>
         </b-form-group>
         <b-form-group
-                      label="文字色"
-                      label-for="textcolorInput"
+          label="文字色"
+          label-for="textcolorInput"
         >
-          <slider-picker v-model="textcolor" id="textcolorInput" />
+          <Swatches v-model="textcolor" id="textcolorInput"  style="display: inline-block;"/>
         </b-form-group>
         <b-form-group
-                      label="背景色"
-                      label-for="bgcolorInput"
+          label="背景色"
+          label-for="bgcolorInput"
         >
-          <slider-picker v-model="bgcolor" id="bgcolorInput" />
+          <Swatches v-model="bgcolor" id="bgcolorInput" style="display: inline-block;"/>
         </b-form-group>
       </div>
     </b-modal>
@@ -85,8 +85,8 @@
 import store from "@/store"
 import HorizontalText from "@/components/HorizontalText"
 import VerticalText from "@/components/VerticalText"
-import { Slider } from 'vue-color'
-import {RotateSquare2} from 'vue-loading-spinner'
+import { Swatches } from 'vue-color'
+import { RotateSquare2 } from 'vue-loading-spinner'
 import axios from 'axios';
 
 export default {
@@ -94,7 +94,7 @@ export default {
   components: {
     HorizontalText,
     VerticalText,
-    'slider-picker': Slider,
+    Swatches,
     RotateSquare2,
   },
   data() {
