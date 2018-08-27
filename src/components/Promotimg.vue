@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="display: inline-block; letter-spacing: -.4em;">
+    <div style="display: inline-block; letter-spacing: -.4em; padding: 10px;">
       <HorizontalText v-if="textposition=='top'" v-on:click.native="textDialog=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;" />
       <VerticalText v-if="textposition=='left'" v-on:click.native="textDialog=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
       <!-- TODO 縦横最大幅指定 -->
@@ -14,6 +14,8 @@
 
     <b-modal v-model="resultDialog" title="イメージ作成完了しました" ok-only ok-title="閉じる">
       <b-img :src="resultimage"></b-img>
+      <br>
+      <b-link :href="resultimage" download>イメージをダウンロード</b-link>
     </b-modal>
 
     <b-modal v-model="creatingDialog" title="イメージ作成中です" hide-footer hide-header-close no-close-on-backdrop no-close-on-esc>
