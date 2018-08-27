@@ -1,12 +1,12 @@
 <template>
   <div>
     <div style="display: inline-block; letter-spacing: -.4em;">
-      <HorizontalText v-show="textposition=='top'" v-on:click.native="textDialog=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;" />
-      <VerticalText v-show="textposition=='left'" v-on:click.native="textDialog=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
+      <HorizontalText v-if="textposition=='top'" v-on:click.native="textDialog=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;" />
+      <VerticalText v-if="textposition=='left'" v-on:click.native="textDialog=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
       <!-- TODO 縦横最大幅指定 -->
       <img v-bind:src="baseimage" id="baseimage" v-on:click="imageDialog=true" v-on:load="handleLoadBaseimage">
-      <VerticalText v-show="textposition=='right'" v-on:click.native="textDialog=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
-      <HorizontalText v-show="textposition=='bottom'" v-on:click.native="textDialog=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;"/>
+      <VerticalText v-if="textposition=='right'" v-on:click.native="textDialog=true" v-bind:style="{ height: imageHeight + 'px' }" style="display: inline-block; vertical-align: middle; letter-spacing:normal;" />
+      <HorizontalText v-if="textposition=='bottom'" v-on:click.native="textDialog=true" v-bind:style="{ width: imageWidth + 'px' }" style="letter-spacing:normal; margin: auto;"/>
     </div>
     <div>
       <b-button size="lg" variant="primary" v-on:click="handleCreateButton">イメージ作成</b-button>
@@ -14,6 +14,12 @@
 
     <b-modal v-model="resultDialog" title="イメージ作成完了しました" ok-only ok-title="閉じる">
       <b-img :src="resultimage"></b-img>
+    </b-modal>
+
+    <b-modal v-model="creatingDialog" title="イメージ作成中です" hide-footer hide-header-close no-close-on-backdrop no-close-on-esc>
+      <div style="display: inline-block;">
+        <rotate-square2 size="90px"></rotate-square2>
+      </div>
     </b-modal>
 
     <b-modal v-model="imageDialog" title="イメージを選択してください" ok-only ok-title="閉じる">
@@ -51,8 +57,8 @@
           <b-form-radio-group id="textpositionInput" v-model="textposition" name="textposition">
             <b-form-radio value="top">上</b-form-radio>
             <b-form-radio value="bottom">下</b-form-radio>
-            <b-form-radio value="right">右</b-form-radio>
             <b-form-radio value="left">左</b-form-radio>
+            <b-form-radio value="right">右</b-form-radio>
           </b-form-radio-group>
         </b-form-group>
         <b-form-group
@@ -78,6 +84,7 @@ import store from "@/store"
 import HorizontalText from "@/components/HorizontalText"
 import VerticalText from "@/components/VerticalText"
 import { Slider } from 'vue-color'
+import {RotateSquare2} from 'vue-loading-spinner'
 import axios from 'axios';
 
 export default {
@@ -85,13 +92,15 @@ export default {
   components: {
     HorizontalText,
     VerticalText,
-    'slider-picker': Slider
+    'slider-picker': Slider,
+    RotateSquare2,
   },
   data() {
     return {
       imageDialog: false,
       textDialog: false,
       resultDialog: false,
+      creatingDialog: false,
       imageHeight: 255,
       imageWidth: 255,
       resultimage: "",
@@ -151,7 +160,10 @@ export default {
     handleChangeBaseimage(event) {
       var file = event.target.files[0];
       if (file && file.type.match(/^image\/(png|jpeg)$/)) {
-        this.baseimage = window.URL.createObjectURL(file);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = ()  => this.baseimage = reader.result
+        reader.onerror = error => alert('イメージの取り込みに失敗しました')
       } else {
         // TODO アラート表示
         // this.baseimage = "";
@@ -163,7 +175,7 @@ export default {
       this.imageHeight = event.currentTarget.height
     },
     handleCreateButton(event) {
-      // TODO LOADING
+      this.creatingDialog = true
 
       return axios.post('https://us-central1-promotimg.cloudfunctions.net/image', 
         JSON.stringify({
@@ -181,11 +193,15 @@ export default {
           }
         }
       )
+      .catch((err) => {
+        this.creatingDialog = false
+        alert('すみません、イメージの作成に失敗しました')
+      })
       .then((res) => {
+        this.creatingDialog = false
         this.resultimage = res.data['url']
         this.resultDialog = true
       })
-      // TODO エラー時の処理追加
     }
   }
 };
