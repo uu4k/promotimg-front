@@ -10,7 +10,20 @@
     </div>
     <div>
       <b-button size="lg" variant="primary" v-on:click="handleCreateButton">イメージ作成</b-button>
+      <b-button size="lg" variant="outline-success" v-on:click="helpDialog=true">？</b-button>
     </div>
+
+    <b-modal v-model="helpDialog" title="説明書" ok-only ok-title="閉じる" style="text-align: left;">
+      <div>
+      画像と文字列を合体させるだけのアプリケーションです。
+      </div>
+
+      <ol>
+        <li>中央の画像をクリックして、合体したい画像を選択</li>
+        <li>中央の画像下の文字列をクリックし、合体したい文字列を入力</li>
+        <li>イメージ作成ボタンを押して少し待てば完了</li>
+      </ol>
+    </b-modal>
 
     <b-modal v-model="resultDialog" title="イメージ作成完了しました" ok-only ok-title="閉じる">
       <b-img :src="resultimage"></b-img>
@@ -55,6 +68,7 @@
         <b-form-group
           label="テキスト位置"
           label-for="textpositionInput"
+          description="左右はβ版です"
         >
           <b-form-radio-group id="textpositionInput" v-model="textposition" name="textposition">
             <b-form-radio value="top">上</b-form-radio>
@@ -103,6 +117,7 @@ export default {
       textDialog: false,
       resultDialog: false,
       creatingDialog: false,
+      helpDialog: false,
       imageHeight: 255,
       imageWidth: 255,
       resultimage: "",
@@ -185,7 +200,7 @@ export default {
           textposition: this.textposition,
           textcolor: this.textcolor,
           bgcolor: this.bgcolor,
-          textsize: this.textsize,
+          textsize: parseInt(this.textsize, 10),
           baseimagename: "dummy.png",
           baseimage: this.baseimage.split(",")[1]
         }),
@@ -195,14 +210,14 @@ export default {
           }
         }
       )
-      .catch((err) => {
-        this.creatingDialog = false
-        alert('すみません、イメージの作成に失敗しました')
-      })
       .then((res) => {
         this.creatingDialog = false
         this.resultimage = res.data['url']
         this.resultDialog = true
+      })
+      .catch((err) => {
+        this.creatingDialog = false
+        alert('すみません、イメージの作成に失敗しました')
       })
     }
   }
